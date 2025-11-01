@@ -229,7 +229,7 @@ export const CONTENT_MAP: Record<string, ContentBucket> = {
   // INVESTASI → Sub Instalasi PKS (submenu)
   'investasi/sub-instalasi-pks': {
     title: 'Investasi & Eksploitasi Pabrik • Sub Instalasi PKS',
-    subtitle: 'Klik grup untuk menampilkan tahun. Klik tombol (anak) akan memunculkan Form Permohonan.',
+    subtitle: 'Klik grup untuk menampilkan tahun. Klik tombol untuk membuka tautan di tab baru.',
     items: INVEST_SUB_INSTALASI_PKS_ITEMS,
   },
 };
