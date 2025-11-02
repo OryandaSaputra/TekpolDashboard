@@ -1,4 +1,5 @@
 import { Filter } from 'lucide-react';
+import Image from 'next/image';
 
 export default function AppHeader() {
   return (
@@ -6,10 +7,14 @@ export default function AppHeader() {
       <div className="mx-auto max-w-[1400px] px-4 h-14 flex items-center justify-between">
         <div className="flex items-center gap-3 font-semibold">
           {/* Logo PTPN 4 Regional III */}
-          <img
+          <Image
             src="https://www.mendaftarkerja.com/wp-content/uploads/2024/09/IMG_3702.png"
             alt="PTPN IV Regional III"
+            width={120}                 // dimensi eksplisit agar LCP optimal
+            height={32}
             className="h-7 w-auto object-contain"
+            priority                    // logo -> prioritas tinggi
+            unoptimized                 // hilangkan jika sudah allow domain di next.config
           />
           <span>Dashboard Teknik & Pengolahan</span>
         </div>
