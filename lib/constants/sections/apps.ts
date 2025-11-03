@@ -30,6 +30,8 @@ const FALLBACK_APPS: LinkItem[] = [
   { id: 'app-ed', title: 'E-Disposisi', href: 'http://118.97.163.52:88/disposisi/index.php/auth/login', tag: 'Login' },
   { id: 'app-sipc', title: 'SOP IK PALM CO', href: 'https://ims.ptpn4.co.id/', tag: 'Login' },
   { id: 'app-oj', title: 'OSLOG JYOTI', href: 'https://oslog.id/app/', tag: 'Login' },
+  //baru
+  { id: 'app-hitmi', title: 'HITMI', href: 'http://118.97.163.52:8223/index.php/login', tag: 'Login' },
 ];
 
 /** ===== Helper: hilangkan duplikat berdasar href ===== */

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Home, Factory, ChevronDown, ChevronRight, FolderOpen, FileText, AppWindow } from 'lucide-react';
+import { Home, Factory, ChevronDown, ChevronRight, FolderOpen, FileText, AppWindow, Images } from 'lucide-react';
 import { PathKey } from '@/lib/types';
 import { cls } from '@/lib/utils';
 
@@ -31,7 +31,7 @@ export default function Sidebar({
         )}
       >
         <Home className="w-4 h-4" />
-        <span className="text-sm font-medium">Home</span>
+        <span className="text-sm font-medium text-left">Home</span>
       </button>
 
       {/* Pengolahan */}
@@ -42,7 +42,7 @@ export default function Sidebar({
         >
           {openPengolahan ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
           <Factory className="w-4 h-4" />
-          <span className="text-sm font-semibold">Pengolahan</span>
+          <span className="text-sm font-semibold text-left leading-snug">Pengolahan</span>
         </button>
 
         {openPengolahan && (
@@ -56,7 +56,7 @@ export default function Sidebar({
               )}
             >
               <FileText className="w-4 h-4" />
-              <span className="font-medium">Tukang olah</span>
+              <span className="font-medium text-left">Tukang olah</span>
             </button>
           </div>
         )}
@@ -70,7 +70,10 @@ export default function Sidebar({
         >
           {openInvestasi ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
           <FolderOpen className="w-4 h-4" />
-          <span className="text-sm font-semibold">Investasi dan Eksploitasi Pabrik</span>
+          {/* pastikan rata kiri */}
+          <span className="text-sm font-semibold text-left leading-snug whitespace-normal break-words">
+            Investasi dan Eksploitasi Pabrik
+          </span>
         </button>
         {openInvestasi && (
           <div className="ml-7 mt-1 space-y-1">
@@ -82,7 +85,7 @@ export default function Sidebar({
               )}
             >
               <FileText className="w-4 h-4" />
-              <span className="font-medium">Sub Instalasi PKS</span>
+              <span className="font-medium text-left">Sub Instalasi PKS</span>
             </button>
           </div>
         )}
@@ -96,7 +99,7 @@ export default function Sidebar({
         >
           {openTeknik ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
           <FolderOpen className="w-4 h-4" />
-          <span className="text-sm font-semibold">Teknik dan Infrastruktur</span>
+          <span className="text-sm font-semibold text-left leading-snug">Teknik dan Infrastruktur</span>
         </button>
         {openTeknik && (
           <div className="ml-7 mt-1 space-y-1">
@@ -108,13 +111,13 @@ export default function Sidebar({
               )}
             >
               <FileText className="w-4 h-4" />
-              <span className="font-medium">Sub Teknik dan Infrastruktur</span>
+              <span className="font-medium text-left">Sub Teknik dan Infrastruktur</span>
             </button>
           </div>
         )}
       </div>
 
-      {/* Tekpol Apps (menu baru) */}
+      {/* Tekpol Apps */}
       <div className="mt-2">
         <button
           onClick={() => onSelect('tekpol-apps' as PathKey)}
@@ -124,7 +127,21 @@ export default function Sidebar({
           )}
         >
           <AppWindow className="w-4 h-4" />
-          <span className="text-sm font-semibold">Apps HO dan Regional</span>
+          <span className="text-sm font-semibold text-left leading-snug">Apps HO dan Regional</span>
+        </button>
+      </div>
+
+      {/* Galeri (menu baru) */}
+      <div className="mt-2">
+        <button
+          onClick={() => onSelect('galeri' as PathKey)}
+          className={cls(
+            'w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800',
+            activeKey === ('galeri' as PathKey) && 'bg-slate-100 dark:bg-slate-800'
+          )}
+        >
+          <Images className="w-4 h-4" />
+          <span className="text-sm font-semibold text-left leading-snug">Galeri</span>
         </button>
       </div>
     </aside>
