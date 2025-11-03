@@ -91,15 +91,6 @@ const TO_INSTALASI: LinkItem[] = [
   { id: 'inst-sop-ik', title: 'SOP & IK', href: 'https://drive.google.com/drive/folders/1AbuXwtpZKb6R7Nuxw6afrK6PqK-Rm2Ul' },
 ];
 
-const TO_APLIKASI: LinkItem[] = [
-  { id: 'app-mypalmco', title: 'MYPALMCO', href: 'https://palmco.my.id/' },
-  { id: 'app-etekpol', title: 'E-Tekpol', href: 'http://118.97.163.52:8182/etekpol/' },
-  { id: 'app-elemen', title: 'Elemen', href: 'https://elemen.ptpn.id/auth/welcome' },
-  { id: 'app-pica', title: 'PICA', href: 'https://picatekpol.ptpn4.co.id/login' },
-  { id: 'app-iqx', title: 'IQX', href: 'https://app.iqx.net' },
-  { id: 'app-mims', title: 'MIMS - Angka Kerja', href: 'https://ptpn4.handal.in/account/login' },
-  { id: 'app-intank', title: 'PALMCO - Intank Dashboard', href: 'https://palmco.intank.id/login' },
-];
 
 export const PENGOLAHAN_TUKANG_OLAH: ContentBucket = {
   title: 'Pengolahan • Sub Tukang olah',
@@ -119,6 +110,5 @@ export const PENGOLAHAN_TUKANG_OLAH: ContentBucket = {
     { id: 'grp-stok-gudang', title: 'Stok Gudang Barang', children: TO_STOK_GUDANG },
     { id: 'grp-kontrak', title: 'Kontrak', children: TO_KONTRAK },
     { id: 'grp-instalasi', title: 'Instalasi', children: TO_INSTALASI },
-    { id: 'grp-aplikasi', title: 'Aplikasi', children: TO_APLIKASI },
   ],
 };

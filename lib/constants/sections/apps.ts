@@ -17,6 +17,11 @@ const FALLBACK_APPS: LinkItem[] = [
   { id: 'app-iqx', title: 'IQX', href: 'https://app.iqx.net', tag: 'Login' }, // disingkat ke domain utama
   { id: 'app-mims', title: 'MIMS - Angka Kerja', href: 'https://ptpn4.handal.in/account/login', tag: 'Login' },
   { id: 'app-intank', title: 'PALMCO - Intank Dashboard', href: 'https://palmco.intank.id/login', tag: 'Login' },
+  //baru ni yaa
+  { id: 'app-apapun', title: 'apapun', href: 'https://palmco.intank.id/login', tag: 'Login' },
+  { id: 'app-syifa', title: 'syifa', href: 'https://palmco.intank.id/login', tag: 'Login' },
+  { id: 'app-syifa2', title: 'syifa2', href: 'https://palmco.my.id/' },
+
 ];
 
 export const TEKPOL_APPS_BUCKET: ContentBucket = {
