@@ -1,13 +1,10 @@
-// lib/types.ts
-export type PathKey = string;
-
 export type LinkItem = {
   id: string;
   title: string;
-  href?: string;     // ada jika item daun (leaf)
+  href?: string;
   desc?: string;
   tag?: string;
-  children?: LinkItem[]; // ada jika item grup (expandable)
+  children?: LinkItem[]; // kalau ada -> dianggap group/folder
 };
 
 export type ContentBucket = {
@@ -15,3 +12,11 @@ export type ContentBucket = {
   subtitle?: string;
   items: LinkItem[];
 };
+
+// Hanya path yang benar-benar ada di CONTENT_MAP
+export type PathKey =
+  | 'home'
+  | 'pengolahan/tukangolah'
+  | 'investasi/sub-instalasi-pks'
+  | 'teknik/sub'
+  | 'tekpol-apps'; // ⬅️ menu baru
