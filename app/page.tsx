@@ -20,9 +20,8 @@ import AppHeader from '@/components/layout/AppHeader';
 import { CONTENT_MAP } from '@/lib/constants';
 import type { PathKey, LinkItem } from '@/lib/types';
 
-// ---------- Type guard untuk item ber-children (hindari `any`) ----------
+// ---------- Type guard ----------
 type GroupItem = { id: string; title: string; children: LinkItem[] };
-
 function isGroupItem(it: unknown): it is GroupItem {
   return (
     typeof it === 'object' &&
@@ -206,13 +205,11 @@ export default function Page() {
 
   const content = CONTENT_MAP[activeKey] ?? { title: 'Tidak ditemukan', items: [] };
 
-  // Apakah bucket ini bertipe "group" (punya children)?
   const hasGroupedItems = useMemo(
     () => Array.isArray(content.items) && content.items.some((it) => isGroupItem(it)),
     [content.items]
   );
 
-  // Untuk bucket flat (tanpa children), siapkan filter sederhana
   const filteredFlatItems: LinkItem[] = useMemo(() => {
     if (hasGroupedItems) return [];
     const list = (content.items as LinkItem[]) || [];
@@ -226,14 +223,12 @@ export default function Page() {
     );
   }, [content.items, hasGroupedItems, search]);
 
+  /* Tidak pakai gradient di wrapper agar video/foto background terlihat */
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 text-slate-800 dark:from-slate-900 dark:to-slate-950 dark:text-slate-100">
-      {/* Header */}
+    <div className="min-h-screen text-slate-800 dark:text-slate-100">
       <AppHeader />
 
-      {/* BODY */}
       <div className="mx-auto max-w-[1400px] px-2 sm:px-4 py-4 grid grid-cols-1 md:grid-cols-[280px_1fr] gap-4">
-        {/* SIDEBAR */}
         <Sidebar
           activeKey={activeKey}
           onSelect={(k) => {
@@ -242,7 +237,6 @@ export default function Page() {
           }}
         />
 
-        {/* MAIN */}
         <main className="space-y-4">
           {activeKey === 'home' ? (
             <HomeSection />
@@ -268,13 +262,10 @@ export default function Page() {
                 </div>
               </div>
 
-              {/* BODY */}
               <div className="mt-5">
                 {hasGroupedItems ? (
-                  // Grid grouped (dropdown default terbuka, diatur di ContentGrid/ContentGroup)
                   <ContentGrid bucket={content as unknown as { title: string; items: GroupItem[] }} search={search} />
                 ) : (
-                  // Grid flat item (tanpa children)
                   <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                     {filteredFlatItems.map((item) => (
                       <article
@@ -308,7 +299,9 @@ export default function Page() {
                       </article>
                     ))}
                     {filteredFlatItems.length === 0 && (
-                      <div className="col-span-full text-center text-slate-500 py-10">Tidak ada dokumen yang cocok.</div>
+                      <div className="col-span-full text-center text-slate-500 py-10">
+                        Tidak ada dokumen yang cocok.
+                      </div>
                     )}
                   </div>
                 )}

@@ -124,7 +124,7 @@ export default function Sidebar({
           )}
         >
           <AppWindow className="w-4 h-4" />
-          <span className="text-sm font-semibold">Tekpol Apps</span>
+          <span className="text-sm font-semibold">Apps HO dan Regional</span>
         </button>
       </div>
     </aside>

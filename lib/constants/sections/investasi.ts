@@ -67,18 +67,6 @@ const KONTRAK_DOKUMEN: LinkItem = {
   ],
 };
 
-/** 5) Portal & Sistem */
-const PORTAL_SISTEM: LinkItem = {
-  id: 'grp-portal-sistem',
-  title: 'Portal & Sistem',
-  children: [
-    { id: 'e-office', title: 'E-Office PTPN V', href: 'http://118.97.163.52:8300/login', tag: 'Login' },
-    { id: 'e-disposisi', title: 'E-Disposisi', href: 'http://118.97.163.52:88/disposisi/index.php/auth/login', tag: 'Login' },
-    { id: 'au31', title: 'AU31 Online', href: 'http://app1.ptpn5.co.id:8196/au31/login', tag: 'Login' },
-    { id: 'ips', title: 'IPS', href: 'https://ips.holding-perkebunan.com/login', tag: 'Login' },
-    { id: 'sop-ik-palmco', title: 'SOP IK PALM CO', href: 'https://ims.ptpn4.co.id/' },
-  ],
-};
 
 /** Export sebagai satu halaman grid */
 export const INVESTASI_CONTENT: Record<string, ContentBucket> = {
@@ -89,7 +77,6 @@ export const INVESTASI_CONTENT: Record<string, ContentBucket> = {
       KOND_PERALATAN_BULANAN,
       MONITORING,
       KONTRAK_DOKUMEN,
-      PORTAL_SISTEM,
     ],
   },
 };

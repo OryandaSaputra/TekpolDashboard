@@ -117,21 +117,6 @@ const HALAMAN_MUKA_ITEMS: LinkItem[] = [
   { id: 'hm-spi', title: 'Data Permintaan SPI', href: 'https://sites.google.com/view/monitoring-spi--bid-tek-2025/halaman-muka' },
 ];
 
-/** =========================================================
- *  WEB APK
- *  ======================================================= */
-const WEB_APK_ITEMS: LinkItem[] = [
-  { id: 'apk-sinusa', title: 'SINUSA', href: 'https://www.google.com/url?q=https%3A%2F%2Fsinusa.holding-perkebunan.com%3A8443%2F&sa=D&sntz=1&usg=AOvVaw3CUbgjuBBE87izI2Gxbtaj' },
-  { id: 'apk-e-budget', title: 'E-BUDGET', href: 'https://sites.google.com/view/tekpoln5/halaman-muka/e-budget' },
-  { id: 'apk-elemen', title: 'ELEMEN', href: 'https://elemen.ptpn.id/auth/welcome' },
-  { id: 'apk-monev-infra', title: 'APK MONITORING INFRA (User: regional3 / Pass: 83740223)', href: 'https://monev.palmviews.my.id/login', tag: 'Login' },
-  { id: 'apk-e-office', title: 'E-OFFICE', href: 'http://118.97.163.52:8300/login', tag: 'Login' },
-  { id: 'apk-ips-holding', title: 'IPS HOLDING', href: 'https://ips.holding-perkebunan.com/login', tag: 'Login' },
-  { id: 'apk-olidos', title: 'OLIDOS', href: 'https://olidoss.reg3.ptpn4.co.id/' },
-  { id: 'apk-au31', title: 'AU31 ONLINE', href: 'https://app.reg3.ptpn4.co.id/au31/login', tag: 'Login' },
-  { id: 'apk-hsp', title: 'HSP', href: 'http://118.97.163.52:8182/' },
-  { id: 'apk-helpdesk', title: 'HELPDESK', href: 'http://ptpn5.co.id/helpdesk/' },
-];
 
 /** =========================================================
  *  2023
@@ -230,7 +215,6 @@ export const TEKNIK_CONTENT: Record<string, ContentBucket> = {
     title: 'Teknik & Infrastruktur • Sub Teknik dan Infrastruktur',
     items: [
       { id: 'menu-halaman-muka', title: 'Halaman Muka', children: HALAMAN_MUKA_ITEMS },
-      { id: 'menu-web-apk', title: 'Web APK', children: WEB_APK_ITEMS },
       { id: 'menu-2023', title: '2023', children: TAHUN_2023_ITEMS },
       { id: 'menu-2024', title: '2024', children: TAHUN_2024_ITEMS },
       { id: 'menu-2025', title: '2025', children: TAHUN_2025_ITEMS },
