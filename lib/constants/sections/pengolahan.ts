@@ -38,11 +38,6 @@ const TO_IZIN_LA: LinkItem[] = [
   { id: 'izin-la', title: 'IZIN LA', href: 'https://drive.google.com/drive/u/0/folders/1v6SHTgauUQqiPEaZDbwiI_vwsD5SuWMU' },
 ];
 
-const TO_SOP_IK: LinkItem[] = [
-  { id: 'sop', title: 'SOP', href: 'https://drive.google.com/drive/folders/1cagnUq4V3umYmlvdP-nWsC8bjMGaSrVA' },
-  { id: 'ika', title: 'IKA', href: 'https://drive.google.com/drive/folders/1_INtguCgHdcnOdKj7H62p1KJGkvRgI3n' },
-];
-
 const TO_DRAFT_MONTHLY: LinkItem[] = [
   { id: 'draft-2025-07', title: 'Juli 2025', href: 'https://drive.google.com/drive/folders/1d2IDbfPTKKxNdMwNaXrRKB01aSLrWNF2' },
   { id: 'draft-2025-08', title: 'Agustus 2025', href: 'https://drive.google.com/drive/folders/1NkxzlvkG8ws5U1y3njrAoNs1L49blkdZ' },
@@ -78,19 +73,6 @@ const TO_KONTRAK: LinkItem[] = [
   { id: 'kontrak-login', title: 'Kontrak (User: 3 TEP, Pass: 3TEP)', href: 'https://app.ptpn5.co.id/owncloud/index.php/login' },
 ];
 
-const TO_INSTALASI: LinkItem[] = [
-  { id: 'inst-sub', title: 'SUB INSTALASI PKS (KSWT)', href: 'https://sites.google.com/view/instalasi-/home' },
-  { id: 'inst-katalog', title: 'KATALOG', href: 'https://drive.google.com/drive/folders/1zfENohyiSmAdatdOhRknxal8V8DE1NIT' },
-  { id: 'inst-bastek-2024', title: 'BASTEK 2024', href: 'https://drive.google.com/drive/folders/1UySvdds1kopX3iR83UaZO7rEcLIEVbi8?hl=id' },
-  { id: 'inst-sppbj-2024', title: 'SPPBJ 2024', href: 'https://drive.google.com/drive/folders/1TkhgpUQZsc6snVYg6Y7JeqM65CK30TS6?hl=id' },
-  { id: 'inst-kontrak-2024', title: 'KONTRAK 2024', href: 'https://drive.google.com/drive/folders/1GMr2BFV1YSxhrJMxdrQmYL_lC3hiw7Np' },
-  { id: 'inst-bastek-2025', title: 'BASTEK 2025', href: 'https://drive.google.com/drive/folders/17tkxvy_-WLRHuUe6GX2fgAB42skoAdhc' },
-  { id: 'inst-sppbj-2025', title: 'SPPBJ 2025', href: 'https://drive.google.com/drive/folders/1StxJpEaRp3SiVIc5TiFpFiBro4DKxnio' },
-  { id: 'inst-kontrak-2025', title: 'KONTRAK 2025', href: 'https://app.ptpn5.co.id/owncloud/index.php/s/dCZuHRm1cZZRXN1' },
-  { id: 'inst-data-holding', title: 'DATA HOLDING', href: 'https://drive.google.com/drive/folders/1RgQN0uY3GRW-utzunRti0mGKOej0VMec' },
-  { id: 'inst-sop-ik', title: 'SOP & IK', href: 'https://drive.google.com/drive/folders/1AbuXwtpZKb6R7Nuxw6afrK6PqK-Rm2Ul' },
-];
-
 
 export const PENGOLAHAN_TUKANG_OLAH: ContentBucket = {
   title: 'Pengolahan • Sub Tukang olah',
@@ -101,7 +83,6 @@ export const PENGOLAHAN_TUKANG_OLAH: ContentBucket = {
     { id: 'grp-rkap-2026', title: 'RKAP 2026', children: TO_RKAP_2026 },
     { id: 'grp-rkap-2025', title: 'RKAP 2025', children: TO_RKAP_2025 },
     { id: 'grp-izin-la', title: 'IZIN LA', children: TO_IZIN_LA },
-    { id: 'grp-sop-ik', title: 'SOP/IK Palmco', children: TO_SOP_IK },
     { id: 'grp-draft-monthly', title: 'Draft Monthly', children: TO_DRAFT_MONTHLY },
     { id: 'grp-oktober', title: 'Oktober', children: TO_OKTOBER },
     { id: 'grp-buku-kalibrasi', title: 'Buku Kalibrasi Storage', children: TO_BK_STORAGE },
@@ -109,6 +90,5 @@ export const PENGOLAHAN_TUKANG_OLAH: ContentBucket = {
     { id: 'grp-ba-stokopname', title: 'BA Stokopname', children: TO_BA_SO },
     { id: 'grp-stok-gudang', title: 'Stok Gudang Barang', children: TO_STOK_GUDANG },
     { id: 'grp-kontrak', title: 'Kontrak', children: TO_KONTRAK },
-    { id: 'grp-instalasi', title: 'Instalasi', children: TO_INSTALASI },
   ],
 };
