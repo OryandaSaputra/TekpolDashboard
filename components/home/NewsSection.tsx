@@ -19,10 +19,11 @@ export default function NewsSection() {
   return (
     <>
       <section className="mt-6">
-        <div className="flex items-center gap-2 mb-3">
+        <div className="inline-flex items-center gap-2 mb-3 bg-emerald-50 px-3 py-1 rounded-lg">
           <Newspaper className="w-5 h-5 text-emerald-600" />
-          <h3 className="font-semibold">Berita Terkini</h3>
+          <h3 className="font-semibold text-emerald-700">Berita Terkini</h3>
         </div>
+
 
         {/* Grid 4 kolom (desktop) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
