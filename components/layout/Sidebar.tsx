@@ -174,19 +174,6 @@ export default function Sidebar({
   <span className="text-sm font-semibold text-left leading-snug">Galeri</span>
 </button>
 
-{/* Info Username & Password */}
-<button
-  onClick={() => onSelect('info-login' as PathKey)}
-  className={cls(
-    'w-full bg-white/90 dark:bg-slate-900/60 border border-slate-200/70 dark:border-slate-800 rounded-xl p-3 mt-3 shadow-sm backdrop-blur-sm flex items-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition',
-    activeKey === ('info-login' as PathKey) && 'bg-slate-100 dark:bg-slate-800'
-  )}
->
-  <User className="w-4 h-4" />
-  <span className="text-sm font-semibold text-left leading-snug">Info Username & Password</span>
-</button>
-
-
     </aside>
   );
 }

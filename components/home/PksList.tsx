@@ -15,11 +15,10 @@ export default function PksList({
   onBack: () => void;
   onSelect: (id: string) => void;
 }) {
-
   return (
     <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/70 p-5">
       <BackBar onBack={onBack} />
-      <h2 className="text-xl font-bold">PKS PT.Perkebunan Nusantara IV Regional III</h2>
+      <h2 className="text-xl font-bold">Daftar PKS ({list.length})</h2>
       <p className="text-sm text-slate-500 mt-1">Klik salah satu pabrik untuk melihat detail profilnya.</p>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 mt-4">
