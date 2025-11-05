@@ -25,13 +25,16 @@ const FALLBACK_APPS: LinkItem[] = [
   { id: 'app-ih', title: 'IPS HOLDING', href: 'https://ips.holding-perkebunan.com/login', tag: 'Login' },
   { id: 'app-oli', title: 'OLIDOS', href: 'https://olidoss.reg3.ptpn4.co.id/', tag: 'Login' },
   { id: 'app-au31', title: 'AU31 ONLINE', href: 'https://app.reg3.ptpn4.co.id/au31/login', tag: 'Login' },
-  { id: 'app-reg3', title: 'HSP', href: 'http://118.97.163.52:8182/', tag: 'Login' },
+  { id: 'app-reg3', title: 'HPS ONLINE', href: 'http://118.97.163.52:8182/', tag: 'Login' },
   { id: 'app-hd', title: 'HELPDESK', href: 'http://ptpn5.co.id/helpdesk/', tag: 'Login' },
   { id: 'app-ed', title: 'E-Disposisi', href: 'http://118.97.163.52:88/disposisi/index.php/auth/login', tag: 'Login' },
-  { id: 'app-sipc', title: 'SOP IK PALM CO', href: 'https://ims.ptpn4.co.id/', tag: 'Login' },
+  { id: 'app-sipc', title: 'IMS (SOP IK PALM CO)', href: 'https://ims.ptpn4.co.id/', tag: 'Login' },
   { id: 'app-oj', title: 'OSLOG JYOTI', href: 'https://oslog.id/app/', tag: 'Login' },
-  //baru
   { id: 'app-hitmi', title: 'HITMI', href: 'http://118.97.163.52:8223/index.php/login', tag: 'Login' },
+  { id: 'app-erin', title: 'ERIN', href: 'https://erin.holding-perkebunan.com/', tag: 'Login' },
+  { id: 'app-aghris', title: 'AGHRIS', href: 'https://aghris.holding-perkebunan.com/', tag: 'Login' },
+  { id: 'app-dashboard', title: 'Dashboard MIMS LOSSES', href: 'https://mims-foss.holding-perkebunan.com/', tag: 'Login' },
+  { id: 'app-asana', title: 'ASANA', href: 'https://app.asana.com/', tag: 'Login' },
 ];
 
 /** ===== Helper: hilangkan duplikat berdasar href ===== */

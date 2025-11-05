@@ -16,7 +16,7 @@ export default function AppHeader() {
             priority                    // logo -> prioritas tinggi
             unoptimized                 // hilangkan jika sudah allow domain di next.config
           />
-          <span>Dashboard Teknik & Pengolahan</span>
+          <span>Dashboard Bagian Teknik & Pengolahan Regional III</span>
         </div>
 
         <button
