@@ -15,7 +15,7 @@ export default function HomeHero() {
       <div className="absolute -bottom-10 -left-10 w-64 h-64 rounded-full bg-black/10 blur-2xl" />
       <div className="relative px-6 py-10">
         <div className="text-2xl sm:text-3xl font-extrabold drop-shadow">
-          Selamat Datang di Dashboard Bagian Teknik & Pengolahan
+          Selamat Datang di Dashboard Teknik & Pengolahan
         </div>
         <p className="mt-2 text-emerald-50/90 max-w-3xl">
           Pusat akses dokumen lintas divisi. Gunakan menu atau kartu di bawah ini untuk membuka profil unit kerja dan berita terkini.
