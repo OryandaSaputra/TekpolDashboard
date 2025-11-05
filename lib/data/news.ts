@@ -22,24 +22,26 @@ export const NEWS_LIST: NewsItem[] = [
       'Setelah dilakukan kalibrasi ulang dan penyesuaian SOP loading, margin efisiensi meningkat pada jam-jam sibuk. Inisiatif ini akan dipadukan dengan dashboard monitoring realtime untuk memastikan konsistensi antar shift.',
     image: '/images/home2.jpg',
   },
-  {
+ {
     id: 'n3',
-    title: 'Digitalisasi Checklist Harian',
-    tag: 'Inovasi',
+    title: 'Youtube PTPN',
+    tag: 'Social Media',
     date: '2025-10-28',
-    excerpt: 'Checklist harian beralih ke formulir digital terintegrasi dengan Tekpol Apps…',
-    body:
-      'Form checklist digital memudahkan pelacakan temuan dan follow-up action. Setiap temuan otomatis masuk ke antrian perbaikan dan dapat dipantau statusnya oleh supervisor dan kepala pabrik.',
+    excerpt: '',
+    body: 'Video resmi YouTube PTPN: highlight digitalisasi checklist harian dan integrasi ke Tekpol.',
     image: '/images/home1.jpg',
+    videoUrl: 'https://youtu.be/PLuotmYa-3A?si=WoYejvN8szacJwqI', // YouTube PTPN
+    labelAbove: 'YouTube PTPN',                               // judul di atas kartu
   },
   {
     id: 'n4',
-    title: 'Pelatihan Keselamatan Kerja',
-    tag: 'EHS',
+    title: 'Mars PTPN',
+    tag: 'Social Media',
     date: '2025-11-01',
-    excerpt: 'EHS menyelesaikan batch pelatihan untuk operator dan teknisi utility…',
-    body:
-      'Batch pelatihan terbaru menekankan lock-out/tag-out, confined space, serta penanganan bahan kimia. Evaluasi menunjukkan peningkatan kepatuhan APD dan pelaporan near-miss.',
+    excerpt: ' ',
+    body: 'Video Mars PTPN: materi K3 (LOTO, confined space, bahan kimia) dan hasil evaluasi.',
     image: '/images/home2.jpg',
+    videoUrl: 'https://youtu.be/5UslbAubrsI?si=Ei88BZ-ANWPvLjy9', // Mars PTPN
+    labelAbove: 'Mars PTPN',                                      // judul di atas kartu
   },
 ];
