@@ -46,12 +46,17 @@ export type PksDetail = {
   catatan: string[]; // bullet points
 };
 
+// lib/types.ts
 export type NewsItem = {
   id: string;
   title: string;
   tag: string;
-  date: string; // ISO atau human-readable
+  date: string;
   excerpt: string;
   body: string;
   image?: string;
+  youtubeId?: string;
+  videoUrl?: string;
+  labelAbove?: string; // <-- judul di atas kartu (opsional)
 };
+
