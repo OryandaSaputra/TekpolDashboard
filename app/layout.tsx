@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Providers from "./providers"; // ⬅️ tambahkan
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,7 +41,12 @@ export default function RootLayout({
         </video>
 
         {/* Konten aplikasi berada di atas overlay/video */}
-        <div className="relative z-10">{children}</div>
+        <div className="relative z-10">
+          {/* ⬇️ Bungkus seluruh aplikasi dengan SessionProvider */}
+          <Providers>
+            {children}
+          </Providers>
+        </div>
       </body>
     </html>
   );

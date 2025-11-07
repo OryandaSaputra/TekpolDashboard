@@ -1,5 +1,6 @@
 import { Filter } from 'lucide-react';
 import Image from 'next/image';
+import UserMenu from "./UserMenu";
 
 export default function AppHeader() {
   return (
@@ -18,14 +19,8 @@ export default function AppHeader() {
           />
           <span>Dashboard Bagian Teknik & Pengolahan Regional III</span>
         </div>
-
-        <button
-          className="inline-flex items-center gap-2 rounded-lg border border-slate-300 dark:border-slate-700 px-3 py-1.5 text-sm hover:bg-slate-50 dark:hover:bg-slate-800"
-          title="Filter (placeholder)"
-        >
-          <Filter className="w-4 h-4" />
-          Filter
-        </button>
+         {/* ⬇️ Tombol Logout/Login selalu tampil di kanan */}
+          <UserMenu />
       </div>
     </header>
   );

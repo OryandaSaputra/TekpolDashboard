@@ -1,3 +1,6 @@
+// lib/types.ts
+
+/* ========== Sidebar & Konten ==========- */
 export type LinkItem = {
   id: string;
   title: string;
@@ -13,18 +16,34 @@ export type ContentBucket = {
   items: LinkItem[];
 };
 
-// tambahkan 'galeri' & tekpol-apps (kalau belum)
+/** Halaman/route internal app (untuk Sidebar) */
 export type PathKey =
   | 'home'
   | 'pengolahan/tukangolah'
   | 'investasi/sub-instalasi-pks'
   | 'teknik/sub'
   | 'tekpol-apps'
-  | 'galeri';
+  | 'galeri'
+  | 'info-login'   // ⬅️ baru
+  | 'approval';    // ⬅️ baru
 
-/* ===== Tambahan untuk Home & Data ===== */
-export type HomeView = 'root' | 'pks-list' | 'pks-detail' | 'ppis' | 'ppkr';
+/* ==========- Home Router Views ==========- */
+export type HomeView =
+  | 'root'
+  | 'pks-list'
+  | 'pks-detail'
+  | 'ppis'
+  | 'ppkr'
+  | 'info-login'    // ⬅️ baru
+  | 'approval';     // ⬅️ baru
 
+/* ==========- Domain types ringkas (tanpa @prisma/client) ==========- */
+/** Pastikan konsisten dengan enum/field di Prisma schema */
+export type Role = 'PKWT' | 'KARYAWAN' | 'KASUBAG' | 'KABAG' | 'GUEST';
+export type Decision = 'PENDING' | 'APPROVED' | 'REJECTED';
+export type Category = 'HO' | 'REGIONAL';
+
+/* ==========- PKS data (statik/dummy) ==========- */
 export type Pks = {
   id: string;
   nama: string;
@@ -46,7 +65,7 @@ export type PksDetail = {
   catatan: string[]; // bullet points
 };
 
-// lib/types.ts
+/* ==========- News ==========- */
 export type NewsItem = {
   id: string;
   title: string;
@@ -57,6 +76,5 @@ export type NewsItem = {
   image?: string;
   youtubeId?: string;
   videoUrl?: string;
-  labelAbove?: string; // <-- judul di atas kartu (opsional)
+  labelAbove?: string; // judul kecil di atas kartu (opsional)
 };
-
