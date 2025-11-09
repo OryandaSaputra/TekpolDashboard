@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useSession, signOut, signIn } from "next-auth/react";
-import { LogOut, LogIn, User2 } from "lucide-react";
+import { LogOut, LogIn} from "lucide-react";
 
 type Role = "PKWT" | "KARYAWAN" | "KASUBAG" | "KABAG" | "GUEST";
 type AppUser = { name?: string | null; role?: Role };

@@ -9,23 +9,19 @@ import ContentGrid from '@/components/content/ContentGrid';
 import AppHeader from '@/components/layout/AppHeader';
 
 import { CONTENT_MAP } from '@/lib/constants';
-import type { PathKey, LinkItem } from '@/lib/types';
+import type { PathKey, LinkItem, HomeView } from '@/lib/types';
 import HomeRouter from '@/components/home/HomeRouter';
 import GallerySection from '@/components/gallery/GallerySection';
 
 type GroupItem = { id: string; title: string; children: LinkItem[] };
 function isGroupItem(it: unknown): it is GroupItem {
-  return (
-    typeof it === 'object' &&
-    it !== null &&
-    'children' in it &&
-    Array.isArray((it as { children: unknown }).children)
-  );
+  return typeof it === 'object' && it !== null && 'children' in it && Array.isArray((it as { children: unknown }).children);
 }
 
 export default function Page() {
   const [activeKey, setActiveKey] = useState<PathKey>('home');
   const [search, setSearch] = useState('');
+  const [homeView, setHomeView] = useState<HomeView>('root'); // ⬅️ view internal Home
 
   const content = CONTENT_MAP[activeKey] ?? { title: 'Tidak ditemukan', items: [] };
 
@@ -58,13 +54,20 @@ export default function Page() {
             setActiveKey(k);
             setSearch('');
           }}
+          onGoHomeView={(v) => {
+            // pindahkan ke Home + set sub-view
+            setActiveKey('home');
+            setHomeView(v);
+          }}
         />
 
         <main className="space-y-4">
           {activeKey === 'home' ? (
-            <HomeRouter />
+            <HomeRouter
+              forcedView={homeView}
+              onViewChange={(v) => setHomeView(v)}
+            />
           ) : activeKey === 'galeri' ? (
-            // Khusus Galeri: render komponen sendiri (grid + modal), tanpa header/search bawaan section umum
             <GallerySection />
           ) : (
             <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70 p-5">

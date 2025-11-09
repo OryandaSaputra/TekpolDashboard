@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import {
@@ -18,7 +17,8 @@ type LoginMode = 'staff' | 'pkwt' | 'guest';
 
 export default function LoginPage() {
   const sp = useSearchParams();
-  const callbackUrl = useMemo(() => sp.get('callbackUrl') ?? '/apps/credentials', [sp]);
+  // ✅ default ke Home
+  const callbackUrl = useMemo(() => sp.get('callbackUrl') ?? '/', [sp]);
 
   const [mode, setMode] = useState<LoginMode>('staff');
 
@@ -28,6 +28,7 @@ export default function LoginPage() {
 
   // guest
   const [guestName, setGuestName] = useState<string>('');
+
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -46,12 +47,13 @@ export default function LoginPage() {
         await signIn('credentials', {
           redirect: true,
           callbackUrl,
-          loginType: 'guest',
+          loginType: 'guest', // ✅ guest
           guestName,
         });
         return;
       }
 
+      // staff & pkwt → jalur yang sama di authorize (loginType: 'staff')
       if (!email.trim() || !password.trim()) {
         setErrorMsg('Email dan password wajib diisi.');
         setLoading(false);
@@ -61,11 +63,11 @@ export default function LoginPage() {
       await signIn('credentials', {
         redirect: true,
         callbackUrl,
-        loginType: mode, // 'staff' | 'pkwt'
+        loginType: 'staff', // ✅ pkwt juga dianggap staff untuk proses login
         email,
         password,
       });
-    } catch (err) {
+    } catch {
       setErrorMsg('Gagal masuk. Coba lagi.');
       setLoading(false);
     }
@@ -81,11 +83,12 @@ export default function LoginPage() {
         {/* Panel brand */}
         <div className="hidden md:flex flex-col justify-between p-8 bg-gradient-to-br from-emerald-600/90 via-emerald-700/80 to-emerald-900/80 text-white">
           <div className="flex items-center gap-3">
-            <div className="relative h-10 w-10 shrink-0">
+            <div className="h-10 w-10 shrink-0">
               <img
                 src="https://www.ptpn4.co.id/icons/Logo%20PTPN%20IV.png"
                 alt="PTPN IV"
                 className="h-10 w-10 object-contain"
+                loading="eager"
               />
             </div>
             <div>
@@ -117,16 +120,12 @@ export default function LoginPage() {
         <div className="p-6 md:p-8 bg-white/80 dark:bg-slate-900/70 backdrop-blur-xl">
           {/* Logo mobile */}
           <div className="md:hidden mb-6 flex items-center gap-3">
-            <div className="relative h-8 w-8">
-              <Image
-                src="/images/ptpn4.png"
-                alt="PTPN IV"
-                fill
-                className="object-contain"
-                sizes="32px"
-                priority
-              />
-            </div>
+            <img
+              src="https://www.ptpn4.co.id/icons/Logo%20PTPN%20IV.png"
+              alt="PTPN IV"
+              className="h-8 w-8 object-contain"
+              loading="eager"
+            />
             <div>
               <div className="text-base font-bold">PTPN IV Regional III</div>
               <div className="text-xs text-slate-500">Dashboard TEKPOL</div>

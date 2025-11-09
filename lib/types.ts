@@ -1,6 +1,4 @@
 // lib/types.ts
-
-/* ========== Sidebar & Konten ==========- */
 export type LinkItem = {
   id: string;
   title: string;
@@ -16,34 +14,27 @@ export type ContentBucket = {
   items: LinkItem[];
 };
 
-/** Halaman/route internal app (untuk Sidebar) */
 export type PathKey =
   | 'home'
   | 'pengolahan/tukangolah'
   | 'investasi/sub-instalasi-pks'
   | 'teknik/sub'
   | 'tekpol-apps'
-  | 'galeri'
-  | 'info-login'   // ⬅️ baru
-  | 'approval';    // ⬅️ baru
+  | 'galeri';
 
-/* ==========- Home Router Views ==========- */
 export type HomeView =
   | 'root'
   | 'pks-list'
   | 'pks-detail'
   | 'ppis'
   | 'ppkr'
-  | 'info-login'    // ⬅️ baru
-  | 'approval';     // ⬅️ baru
+  // tambahan inline di Home:
+  | 'creds'     // daftar kredensial staf (KARYAWAN/KASUBAG/KABAG)
+  | 'request'   // form guest/pkwt
+  | 'approval'// daftar permohonan untuk approver (KASUBAG/KABAG/PIC)
+  | 'info-login'; 
+  
 
-/* ==========- Domain types ringkas (tanpa @prisma/client) ==========- */
-/** Pastikan konsisten dengan enum/field di Prisma schema */
-export type Role = 'PKWT' | 'KARYAWAN' | 'KASUBAG' | 'KABAG' | 'GUEST';
-export type Decision = 'PENDING' | 'APPROVED' | 'REJECTED';
-export type Category = 'HO' | 'REGIONAL';
-
-/* ==========- PKS data (statik/dummy) ==========- */
 export type Pks = {
   id: string;
   nama: string;
@@ -62,10 +53,9 @@ export type PksDetail = {
     tahunOperasional: number;
     jumlahLine: number;
   };
-  catatan: string[]; // bullet points
+  catatan: string[];
 };
 
-/* ==========- News ==========- */
 export type NewsItem = {
   id: string;
   title: string;
@@ -76,5 +66,52 @@ export type NewsItem = {
   image?: string;
   youtubeId?: string;
   videoUrl?: string;
-  labelAbove?: string; // judul kecil di atas kartu (opsional)
+  labelAbove?: string;
 };
+
+// ===== tipe ringan untuk auth & data kredensial/approval =====
+export type Role = 'PKWT' | 'KARYAWAN' | 'KASUBAG' | 'KABAG' | 'GUEST';
+export type Decision = 'PENDING' | 'APPROVED' | 'REJECTED';
+export type Category = 'HO' | 'REGIONAL';
+
+export type App = {
+  id: string;
+  name: string;
+  category: Category;
+  username: string;
+  password: string;
+  description?: string | null;
+};
+
+export type User = {
+  id: string;
+  name: string;
+  email?: string | null;
+  isPic?: boolean;
+  role?: Role;
+};
+
+export type Approval = {
+  id: string;
+  requestId: string;
+  approverId: string;
+  role: Role;
+  decision: Decision;
+  note?: string | null;
+  decidedAt?: Date | null;
+  approver?: User | null;
+};
+
+export type Request = {
+  id: string;
+  type: 'PKWT' | 'GUEST';
+  appId: string;
+  requesterId: string;
+  picId?: string | null;
+  reason?: string | null;
+  division?: string | null;
+  status: Decision;
+  rejectionNote?: string | null;
+};
+
+export type MyReq = Request & { app: App; approvals: Approval[]; pic: User | null };

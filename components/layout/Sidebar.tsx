@@ -1,3 +1,4 @@
+// components/layout/Sidebar.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -15,7 +16,7 @@ import {
 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { PathKey } from '@/lib/types';
+import { PathKey, HomeView } from '@/lib/types';
 import { cls } from '@/lib/utils';
 
 type Role = 'PKWT' | 'KARYAWAN' | 'KASUBAG' | 'KABAG' | 'GUEST';
@@ -23,9 +24,11 @@ type Role = 'PKWT' | 'KARYAWAN' | 'KASUBAG' | 'KABAG' | 'GUEST';
 export default function Sidebar({
   activeKey,
   onSelect,
+  onGoHomeView, // opsional dari page.tsx
 }: {
   activeKey: PathKey;
   onSelect: (k: PathKey) => void;
+  onGoHomeView?: (v: HomeView) => void;
 }) {
   const [openPengolahan, setOpenPengolahan] = useState(true);
   const [openInvestasi, setOpenInvestasi] = useState(false);
@@ -41,13 +44,18 @@ export default function Sidebar({
   const canSeeApproval =
     role === 'KABAG' || role === 'KASUBAG' || (role === 'KARYAWAN' && isPic);
 
+  const goHomeView = (view: HomeView) => {
+    onSelect('home');
+    onGoHomeView?.(view);
+    router.push('/'); // tetap di halaman home
+  };
+
   const handleInfoLoginClick = () => {
     if (!isLoggedIn) {
       router.push('/login');
       return;
     }
-    onSelect('info-login' as PathKey);
-    router.push('/info-login');
+    goHomeView('info-login');
   };
 
   return (
@@ -59,7 +67,10 @@ export default function Sidebar({
       <div className="bg-white/90 dark:bg-slate-900/60 border border-slate-200/70 dark:border-slate-800 rounded-xl p-2 shadow-sm backdrop-blur-sm">
         {/* Home */}
         <button
-          onClick={() => onSelect('home')}
+          onClick={() => {
+            onSelect('home');
+            onGoHomeView?.('root');
+          }}
           className={cls(
             'w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition',
             activeKey === 'home' && 'bg-slate-100 dark:bg-slate-800'
@@ -170,10 +181,7 @@ export default function Sidebar({
         {canSeeApproval && (
           <div className="mt-2">
             <button
-              onClick={() => {
-                onSelect('approval' as PathKey);
-                router.push('/approval');
-              }}
+              onClick={() => goHomeView('approval')}
               className={cls(
                 'w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition',
                 activeKey === ('approval' as PathKey) && 'bg-slate-100 dark:bg-slate-800'
@@ -202,8 +210,7 @@ export default function Sidebar({
       <button
         onClick={handleInfoLoginClick}
         className={cls(
-          'w-full bg-white/90 dark:bg-slate-900/60 border border-slate-200/70 dark:border-slate-800 rounded-xl p-3 mt-3 shadow-sm backdrop-blur-sm flex items-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition',
-          activeKey === ('info-login' as PathKey) && 'bg-slate-100 dark:bg-slate-800'
+          'w-full bg-white/90 dark:bg-slate-900/60 border border-slate-200/70 dark:border-slate-800 rounded-xl p-3 mt-3 shadow-sm backdrop-blur-sm flex items-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-800 transition'
         )}
       >
         <User className="w-4 h-4" />
