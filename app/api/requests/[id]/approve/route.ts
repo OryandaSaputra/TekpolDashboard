@@ -1,5 +1,4 @@
 // app/api/requests/[id]/approve/route.ts
-import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
@@ -7,16 +6,17 @@ import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 import type { Prisma } from '@prisma/client';
 
-export const runtime = 'nodejs'; // wajib Node untuk Prisma
+export const runtime = 'nodejs'; // Prisma wajib Node.js runtime
 
 const Body = z.object({
   decision: z.enum(['APPROVED', 'REJECTED']),
   note: z.string().optional(),
 });
 
-type RouteContext = { params: { id: string } };
-
-export async function POST(req: NextRequest, { params }: RouteContext) {
+export async function POST(
+  req: Request,
+  ctx: { params: { id: string } }
+) {
   const session = await getServerSession(authOptions);
   const approverId = session?.user?.id;
   if (!approverId) {
@@ -26,12 +26,10 @@ export async function POST(req: NextRequest, { params }: RouteContext) {
   const { decision, note } = Body.parse(await req.json());
 
   const reqRow = await prisma.request.findUnique({
-    where: { id: params.id },
+    where: { id: ctx.params.id },
     select: { id: true },
   });
-  if (!reqRow) {
-    return NextResponse.json({ error: 'Not found' }, { status: 404 });
-  }
+  if (!reqRow) return NextResponse.json({ error: 'Not found' }, { status: 404 });
 
   const approval = await prisma.approval.findFirst({
     where: { requestId: reqRow.id, approverId },
