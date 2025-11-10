@@ -1,4 +1,5 @@
 // app/api/requests/[id]/approve/route.ts
+import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
@@ -6,7 +7,7 @@ import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 import type { Prisma } from '@prisma/client';
 
-export const runtime = 'nodejs'; // Prisma butuh Node runtime (bukan Edge)
+export const runtime = 'nodejs'; // wajib Node untuk Prisma
 
 const Body = z.object({
   decision: z.enum(['APPROVED', 'REJECTED']),
@@ -15,7 +16,7 @@ const Body = z.object({
 
 type RouteContext = { params: { id: string } };
 
-export async function POST(req: Request, { params }: RouteContext) {
+export async function POST(req: NextRequest, { params }: RouteContext) {
   const session = await getServerSession(authOptions);
   const approverId = session?.user?.id;
   if (!approverId) {
@@ -24,16 +25,16 @@ export async function POST(req: Request, { params }: RouteContext) {
 
   const { decision, note } = Body.parse(await req.json());
 
-  const request = await prisma.request.findUnique({
+  const reqRow = await prisma.request.findUnique({
     where: { id: params.id },
     select: { id: true },
   });
-  if (!request) {
+  if (!reqRow) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
 
   const approval = await prisma.approval.findFirst({
-    where: { requestId: request.id, approverId },
+    where: { requestId: reqRow.id, approverId },
     select: { id: true },
   });
   if (!approval) {
@@ -50,22 +51,22 @@ export async function POST(req: Request, { params }: RouteContext) {
     });
 
     const approvals = await tx.approval.findMany({
-      where: { requestId: request.id },
+      where: { requestId: reqRow.id },
       select: { decision: true },
     });
 
-    const anyRejected = approvals.some((a) => a.decision === 'REJECTED');
+    const anyRejected = approvals.some(a => a.decision === 'REJECTED');
     if (anyRejected) {
       await tx.request.update({
-        where: { id: request.id },
+        where: { id: reqRow.id },
         data: { status: 'REJECTED', rejectionNote: note ?? null },
       });
       return;
     }
 
-    const allApproved = approvals.every((a) => a.decision === 'APPROVED');
+    const allApproved = approvals.every(a => a.decision === 'APPROVED');
     await tx.request.update({
-      where: { id: request.id },
+      where: { id: reqRow.id },
       data: allApproved
         ? { status: 'APPROVED', rejectionNote: null }
         : { status: 'PENDING' },
