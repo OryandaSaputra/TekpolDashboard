@@ -1,55 +1,75 @@
-import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
-import { z } from "zod";
-import type { PrismaClient } from "@prisma/client";
+// app/api/requests/[id]/approve/route.ts
+import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { prisma } from '@/lib/prisma';
+import { z } from 'zod';
+import type { Prisma } from '@prisma/client';
 
-type Decision = "PENDING" | "APPROVED" | "REJECTED";
+export const runtime = 'nodejs'; // Prisma butuh Node runtime (bukan Edge)
 
 const Body = z.object({
-  decision: z.enum(["APPROVED", "REJECTED"]),
+  decision: z.enum(['APPROVED', 'REJECTED']),
   note: z.string().optional(),
 });
 
-export async function POST(req: Request, { params }: { params: { id: string } }) {
-  const session = await getServerSession(authOptions);
-  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+type RouteContext = { params: { id: string } };
 
-  const approverId = session.user?.id;
-  if (!approverId) return NextResponse.json({ error: "Invalid session" }, { status: 401 });
+export async function POST(req: Request, { params }: RouteContext) {
+  const session = await getServerSession(authOptions);
+  const approverId = session?.user?.id;
+  if (!approverId) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
 
   const { decision, note } = Body.parse(await req.json());
 
   const request = await prisma.request.findUnique({
     where: { id: params.id },
-    include: { approvals: true },
+    select: { id: true },
   });
-  if (!request) return NextResponse.json({ error: "Not found" }, { status: 404 });
+  if (!request) {
+    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  }
 
   const approval = await prisma.approval.findFirst({
     where: { requestId: request.id, approverId },
+    select: { id: true },
   });
-  if (!approval) return NextResponse.json({ error: "Tidak berwenang approve request ini." }, { status: 403 });
+  if (!approval) {
+    return NextResponse.json(
+      { error: 'Tidak berwenang approve request ini.' },
+      { status: 403 }
+    );
+  }
 
-  await prisma.$transaction(async (tx: PrismaClient) => {
+  await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
     await tx.approval.update({
       where: { id: approval.id },
       data: { decision, note, decidedAt: new Date() },
     });
 
-    const approvals = await tx.approval.findMany({ where: { requestId: request.id } });
-    const anyRejected = approvals.some((a: { decision: Decision }) => a.decision === "REJECTED");
+    const approvals = await tx.approval.findMany({
+      where: { requestId: request.id },
+      select: { decision: true },
+    });
+
+    const anyRejected = approvals.some((a) => a.decision === 'REJECTED');
     if (anyRejected) {
-      await tx.request.update({ where: { id: request.id }, data: { status: "REJECTED", rejectionNote: note || null } });
+      await tx.request.update({
+        where: { id: request.id },
+        data: { status: 'REJECTED', rejectionNote: note ?? null },
+      });
       return;
     }
-    const allApproved = approvals.every((a: { decision: Decision }) => a.decision === "APPROVED");
-    if (allApproved) {
-      await tx.request.update({ where: { id: request.id }, data: { status: "APPROVED", rejectionNote: null } });
-    } else {
-      await tx.request.update({ where: { id: request.id }, data: { status: "PENDING" } });
-    }
+
+    const allApproved = approvals.every((a) => a.decision === 'APPROVED');
+    await tx.request.update({
+      where: { id: request.id },
+      data: allApproved
+        ? { status: 'APPROVED', rejectionNote: null }
+        : { status: 'PENDING' },
+    });
   });
 
   return NextResponse.json({ ok: true });
